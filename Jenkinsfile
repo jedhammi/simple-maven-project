@@ -3,6 +3,9 @@ pipeline {
     tools {
         maven 'maven'
     }
+    options {
+    buildDiscarder(logRotator(numToKeepStr: '30', artifactNumToKeepStr: '30'))
+    }
     stages{
         stage('Git checkout'){
             steps{
