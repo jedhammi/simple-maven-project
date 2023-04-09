@@ -3,8 +3,7 @@ pipelines {
     stages{
         stage('Git checkout'){
             steps{
-                git 'https://github.com/vikash-kumar01/demo-counter-app'
-            }
+                git 'https://github.com/jedhammi/simple-maven-project.git'            }
         }
 
     }
