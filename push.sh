@@ -3,9 +3,11 @@
 # Add changes to staging area
 git add .
 
-# Commit changes with commit ID as commit message
-commit_id=$(git rev-parse --short HEAD)
-git commit -m "Changes with commit ID $commit_id"
+# Prompt user to enter commit message
+read -p "Enter commit message: " commit_message
+
+# Commit changes with the entered commit message
+git commit -m "$commit_message"
 
 # Push changes to remote repository
 git push
