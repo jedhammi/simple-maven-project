@@ -4,7 +4,7 @@ pipeline {
         maven 'maven'
     }
     options {
-    buildDiscarder(logRotator(numToKeepStr: '30', artifactNumToKeepStr: '30'))
+    buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '30'))
     }
     stages{
         stage('Git checkout'){
