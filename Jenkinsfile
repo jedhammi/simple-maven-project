@@ -3,7 +3,10 @@ pipelines {
     stages{
         stage('Git checkout'){
             steps{
-                git 'https://github.com/jedhammi/simple-maven-project.git'            }
+                scritp {
+                git 'https://github.com/jedhammi/simple-maven-project.git'
+                }
+            }
         }
 
     }
