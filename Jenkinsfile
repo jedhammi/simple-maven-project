@@ -31,6 +31,12 @@ pipeline {
                 
             }
         }
+        stage('SonarQube'){
+            steps{
+                sh 'mvn clean install'
+                
+            }
+        }
 
     }
 }
