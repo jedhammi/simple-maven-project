@@ -33,7 +33,10 @@ pipeline {
         }
         stage('SonarQube'){
             steps{
-                sh 'mvn clean install'
+                withSonarQubeEnv(credentialsId: 'sonar-user') {
+                    sh 'mvn package sonar:sonar'
+
+                }
                 
             }
         }
