@@ -49,6 +49,7 @@ pipeline {
 
         stage('Upload Artifacts to Nexus'){
             steps{
+                def artifactsVersion = readMavenPom file: 'pom.xml'
                 nexusArtifactUploader artifacts: [
                     [artifactId: 'simple-maven-project',
                      classifier: '',
@@ -61,7 +62,7 @@ pipeline {
                           nexusVersion: 'nexus3',
                            protocol: 'http',
                             repository: 'simple-maven-project-release',
-                             version: '1.0.0-release'                
+                             version: "${artifactsVersion.version}"                
             }
         }
 
