@@ -40,7 +40,7 @@ pipeline {
                 
             }
         }
-        stage('SonarQube'){
+        stage('Quality Gate'){
             steps{
                 waitForQualityGate abortPipeline: false, credentialsId: 'sonar-user'
                 
