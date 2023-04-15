@@ -65,7 +65,7 @@ pipeline {
                           nexusVersion: 'nexus3',
                            protocol: 'http',
                             repository: 'simple-maven-project-snapshot',
-                             version: "${artifactsVersion.version}"
+                             version: "${readPomVersion.version}"
                         }                
             }
         }
