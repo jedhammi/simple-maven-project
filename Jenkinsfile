@@ -52,7 +52,7 @@ pipeline {
                 nexusArtifactUploader artifacts: [
                     [artifactId: 'simple-maven-project',
                      classifier: '',
-                      file: 'target/Uber',
+                      file: 'target/Uber.jar',
                        type: 'jar']
                        ],
                         credentialsId: 'nexus-user', 
