@@ -40,6 +40,12 @@ pipeline {
                 
             }
         }
+        stage('SonarQube'){
+            steps{
+                waitForQualityGate abortPipeline: false, credentialsId: 'sonar-user'
+                
+            }
+        }
 
     }
 }
