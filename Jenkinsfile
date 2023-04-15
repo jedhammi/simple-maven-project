@@ -47,5 +47,23 @@ pipeline {
             }
         }
 
+        stage('Upload Artifacts to Nexus'){
+            steps{
+                nexusArtifactUploader artifacts: [
+                    [artifactId: 'simple-maven-project',
+                     classifier: '',
+                      file: 'target/Uber',
+                       type: 'jar']
+                       ],
+                        credentialsId: 'nexus-user', 
+                        groupId: 'com.example',
+                         nexusUrl: '192.168.1.16:8081',
+                          nexusVersion: 'nexus3',
+                           protocol: 'http',
+                            repository: 'simple-maven-project-release',
+                             version: '1.0.0-release'                
+            }
+        }
+
     }
 }
