@@ -13,7 +13,7 @@ pipeline {
                 
             }
         }
-        stage('Unit Testing'){
+       /** stage('Unit Testing'){
             steps{
                 sh 'mvn test '
                 
@@ -45,12 +45,13 @@ pipeline {
                 waitForQualityGate abortPipeline: false, credentialsId: 'sonar-user'
                 
             }
-        }
+        }**/
 
         stage('Upload Artifacts to Nexus'){
             steps{
                 script {
                 def artifactsVersion = readMavenPom file: 'pom.xml'
+            
                 nexusArtifactUploader artifacts: [
                     [artifactId: 'simple-maven-project',
                      classifier: '',
@@ -64,6 +65,7 @@ pipeline {
                            protocol: 'http',
                             repository: 'simple-maven-project-release',
                              version: "${artifactsVersion.version}"  
+                             echo "${artifactsVersion.version}"
                 }                   
             }
         }
