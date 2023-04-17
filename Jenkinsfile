@@ -13,7 +13,7 @@ pipeline {
                 
             }
         }
-        stage('Unit Testing'){
+       stage('Unit Testing'){
             steps{
                 sh 'mvn test '
                 
@@ -51,7 +51,8 @@ pipeline {
             steps{
                 script {
                 def artifactsVersion = readMavenPom file: 'pom.xml'
-            
+                def nexusRepo = artifactsVersion.version.endsWith("SNAPSHOT") ? "simple-maven-project-snapshot" : "simple-maven-project-release" 
+                echo "nexusRepo"
                 nexusArtifactUploader artifacts: [
                     [artifactId: 'simple-maven-project',
                      classifier: '',
@@ -63,7 +64,7 @@ pipeline {
                          nexusUrl: '192.168.1.16:8081',
                           nexusVersion: 'nexus3',
                            protocol: 'http',
-                            repository: 'simple-maven-project-release',
+                            repository: 'nexusRepo',
                              version: "${artifactsVersion.version}"  
                              echo "${artifactsVersion.version}"
                 }                   
