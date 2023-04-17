@@ -70,6 +70,16 @@ pipeline {
                 }                   
             }
         }
+        stage ("Build Docker images"){
+            
+            steps{
+                script{
+                    sh 'docker build -t maven-image:${BRANCH_NAME}-${BUILD_NUMBER} .'
+                }
+
+            }
+
+        }
 
     }
 }
