@@ -64,7 +64,7 @@ pipeline {
                          nexusUrl: '192.168.1.16:8081',
                           nexusVersion: 'nexus3',
                            protocol: 'http',
-                            repository: 'nexusRepo',
+                            repository: "${nexusRepo}",
                              version: "${artifactsVersion.version}"  
                              echo "${artifactsVersion.version}"
                 }                   
