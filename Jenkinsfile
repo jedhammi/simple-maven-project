@@ -52,7 +52,7 @@ pipeline {
                 script {
                 def artifactsVersion = readMavenPom file: 'pom.xml'
                 def nexusRepo = artifactsVersion.version.endsWith("SNAPSHOT") ? "simple-maven-project-snapshot" : "simple-maven-project-release" 
-                echo "nexusRepo"
+                echo "${nexusRepo}"
                 nexusArtifactUploader artifacts: [
                     [artifactId: 'simple-maven-project',
                      classifier: '',
