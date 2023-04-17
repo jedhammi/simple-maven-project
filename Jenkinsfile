@@ -13,7 +13,7 @@ pipeline {
                 
             }
         }
-       /** stage('Unit Testing'){
+        stage('Unit Testing'){
             steps{
                 sh 'mvn test '
                 
@@ -45,7 +45,7 @@ pipeline {
                 waitForQualityGate abortPipeline: false, credentialsId: 'sonar-user'
                 
             }
-        }**/
+        }
 
         stage('Upload Artifacts to Nexus'){
             steps{
