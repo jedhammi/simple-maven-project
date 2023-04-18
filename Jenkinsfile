@@ -50,11 +50,7 @@ pipeline {
         }
         stage('Quality Gate'){
             steps{
-                waitForQualityGate abortPipeline: false, credentialsId: 'sonar-user'
-                waitForQualityGate abortPipeline: false, credentialsId: 'sonar-user'
-                
-                waitForQualityGate abortPipeline: false, credentialsId: 'sonar-user'                
-                
+                waitForQualityGate abortPipeline: false, credentialsId: 'sonar-user'                              
             }
         }
         stage('Upload Artifacts to Nexus'){
