@@ -74,7 +74,7 @@ pipeline {
             
             steps{
                 script{
-                    sh 'docker build -t maven-image:${BUILD_NUMBER} .'
+                    sh 'docker build -t jedhammi/maven-image:${BUILD_NUMBER} .'
                 }
 
             }
