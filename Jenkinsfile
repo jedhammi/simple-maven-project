@@ -91,11 +91,10 @@ pipeline {
                 }
             }
         }
-        stage ("Push Docker Images"){            
-            
+        stage ("Push Docker Images"){             
             steps{
                 script{
-                    sh 'docker build -t jedhammi/maven-image:${BUILD_NUMBER} .'
+                    sh 'docker push $(docker images | head -2 | tail -1 | awk '{print $1 ":" $2}')'
                 }
             }
         }
