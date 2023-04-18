@@ -74,7 +74,7 @@ pipeline {
             
             steps {
                 withCredentials([usernameColonPassword(credentialsId: '80f124f1-4870-44d0-95c5-e87d75645f0c', variable: 'dockerhub-user')]) {
-                sh 'docker login -u jedhammi -p {dockerhub-user}'
+                sh 'docker login -u jedhammi -p ${dockerhub-user}'
                 sh 'docker push $(docker images | head -2 | tail -1 | awk \'{print $1 ":" $2}\')'
                     }
                 }
