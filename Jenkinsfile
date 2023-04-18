@@ -15,19 +15,25 @@ pipeline {
         }
        stage('Unit Testing'){
             steps{
-                sh 'mvn test '
+                sh 'mvn test '                
                 
             }
         }
         stage('Integration Testing'){
             steps{
                 sh 'mvn verify -DskipUnitTests'
+                sh 'mvn verify -DskipUnitTests'
+                
+                sh 'mvn verify -DskipUnitTests'                
                 
             }
         }
         stage('Build'){
             steps{
                 sh 'mvn clean install'
+                sh 'mvn clean install'
+                
+                sh 'mvn clean install'                
                 
             }
         }
@@ -35,18 +41,22 @@ pipeline {
             steps{
                 withSonarQubeEnv(credentialsId: 'sonar-user', installationName: 'sonar' ) {
                     sh 'mvn package sonar:sonar'
-
                 }
+                }
+                
+                }                
                 
             }
         }
         stage('Quality Gate'){
             steps{
                 waitForQualityGate abortPipeline: false, credentialsId: 'sonar-user'
+                waitForQualityGate abortPipeline: false, credentialsId: 'sonar-user'
+                
+                waitForQualityGate abortPipeline: false, credentialsId: 'sonar-user'                
                 
             }
         }
-
         stage('Upload Artifacts to Nexus'){
             steps{
                 script {
@@ -71,14 +81,23 @@ pipeline {
             }
         }
         stage ("Build Docker images"){
+        stage ("Build Docker images"){
+            
+        stage ("Build Docker Images"){            
             
             steps{
                 script{
                     sh 'docker build -t jedhammi/maven-image:${BUILD_NUMBER} .'
                 }
-
             }
-
+        }
+        stage ("Push Docker Images"){            
+            
+            steps{
+                script{
+                    sh 'docker build -t jedhammi/maven-image:${BUILD_NUMBER} .'
+                }
+            }
         }
 
     }
