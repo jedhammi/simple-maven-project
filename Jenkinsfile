@@ -70,13 +70,10 @@ pipeline {
                 }
             }
         }
-        stage ("Push Docker Images"){             
-            steps{
-                script{
-                    sh 'docker push $(docker images | head -2 | tail -1 | awk '{print $1 ":" $2}')'
+        stage("Push Docker Images") {
+            steps {
+                sh 'docker push $(docker images | head -2 | tail -1 | awk \'{print $1 ":" $2}\')'
                 }
-            }
         }
-
     }
 }
