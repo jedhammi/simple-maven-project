@@ -13,34 +13,34 @@ pipeline {
                 
             }
         }
-       stage('Unit Testing'){
+    stage('Unit Testing'){
             steps{
                 sh 'mvn test '                
             }
         }
-        stage('Integration Testing'){
+    stage('Integration Testing'){
             steps{
                 sh 'mvn verify -DskipUnitTests'                
             }
         }
-        stage('Build'){
+    stage('Build'){
             steps{
                 sh 'mvn clean install'                
             }
         }
-        stage('SonarQube'){
+    stage('SonarQube'){
             steps{
                 withSonarQubeEnv(credentialsId: 'sonar-user', installationName: 'sonar' ) {
                     sh 'mvn package sonar:sonar'
                 }                
             }
         }
-        stage('Quality Gate'){
+    stage('Quality Gate'){
             steps{
                 waitForQualityGate abortPipeline: false, credentialsId: 'sonar-user'                
             }
         }
-        stage('Upload Artifacts to Nexus'){
+    stage('Upload Artifacts to Nexus'){
             steps{
                 script {
                 def artifactsVersion = readMavenPom file: 'pom.xml'
@@ -63,18 +63,19 @@ pipeline {
                 }                   
             }
         }
-        stage ("Build Docker images"){            
+    stage ("Build Docker images"){            
             steps{
                 script{
-                    sh 'docker build -t jedhammi/maven-image:${BUILD_NUMBER} .'
+                    sh "docker build -t jedhammi/maven-image:${BUILD_NUMBER}_${env.GIT_BRANCH.split('/')[1]} ."
+
                 }
             }
         }
-        stage("Push Docker Images") {
+    stage("Push Docker Images") {
             
             steps {
-                withCredentials([usernameColonPassword(credentialsId: '80f124f1-4870-44d0-95c5-e87d75645f0c', variable: 'dockerhub-user')]) {
-                sh 'docker login -u jedhammi -p ${dockerhub-user}'
+                withCredentials([string(credentialsId: '191dcd95-3f43-4c60-86d3-285c00c47c2c', variable: 'dockerhub_cred')]) {
+                sh 'docker login -u jedhammi -p ${dockerhub_cred}'
                 sh 'docker push $(docker images | head -2 | tail -1 | awk \'{print $1 ":" $2}\')'
                     }
                 }
