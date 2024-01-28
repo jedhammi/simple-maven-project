@@ -10,12 +10,12 @@ pipeline {
         stage('Unit Testing') {
             steps {
                 git 'https://github.com/jedhammi/simple-maven-project.git'
-                sh 'mvn test '
+                bat 'mvn test '
             }
         }
         stage('Build') {
             steps {
-                sh 'mvn clean install'
+                bat 'mvn clean install'
             }
         }
     }
