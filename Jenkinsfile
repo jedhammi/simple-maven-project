@@ -3,9 +3,7 @@ pipeline {
     tools {
         maven 'maven'
     }
-    options {
-        buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '30'))
-    }
+   
     stages {
         stage('Unit Testing') {
             steps {
